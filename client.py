@@ -23,3 +23,37 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Connects the socket to the specified server and port
 client.connect((IP, PORT))
 
+# Receives data from the server and decodes it into a string.
+data = client.recv(1024).decode('ascii')
+
+"""
+    Now we start to get data from server. This loop until the received data indicates the end of the file.
+    Inside the loop, it prints the received data, measures the time interval between receiving data, interprets
+    the interval as a binary digit (0 or 1) based on predefined time thresholds, and appends it to the 'covert_bi'
+    string.
+"""
+# Initializes an empty string to store the covert binary data.
+covert_bin = ""
+
+while (data.strip("\n") != "EOF"):
+    # Write the received data to the standard output.
+    stdout.write(data)
+    # Flushes the standard output buffer to ensure immedaite display of the written data.
+    stdout.flush()
+    # Record the current time before receiving an other data from the server.
+    t0 = time()
+    # Receives next data from the server
+    data = client.recv(1024).decode('ascii')
+    # Record the time after receiving the data.
+    t1 = time()
+    # Calculate the time interval between receiving the data and the previous data reception time, rounded to three decimal places.
+    delta = round(t1 - t0, 3)
+    # Compares the time interval with the threshold value 'ONE' to determine if the received bit is 1 or 0.
+    if (delta >= ONE):
+        # Appends '1' to to the covert binary string if the time interval indicates a binary 1.
+        covert_bin += "1"
+    else:
+        # If the time interval is less than 'ONE', it implies a binary 0.
+        covert_bin += "0"
+# Closes the socket connection with the server.
+client.close()
