@@ -12,7 +12,6 @@ from time import time
 # Specifies the server's IP address and port number for connection.
 IP = '127.0.0.1'
 PORT = 55555
-DEBUG = True
 # Defines time intervals corresponding to binary values 1 and 0, respectively.
 ONE = 0.1
 ZERO = 0.025
