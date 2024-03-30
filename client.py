@@ -57,3 +57,29 @@ while (data.strip("\n") != "EOF"):
         covert_bin += "0"
 # Closes the socket connection with the server.
 client.close()
+
+"""
+    This loop iterates through the covert binary string, converting each byte into its correspondig decimal
+    value and then into a character using the 'chr()' function.
+"""
+
+covert = ""
+i=0
+while (i<len(covert_bin)):
+    # Select one byte of the covert binary string.
+    message_byte = covert_bin[i:i+8]
+    
+    if(len(message_byte) !=8):
+        break
+    
+    # Converts a binary string 'b' into its corresponding decimal integer ''
+    char_decimal = int("0b{}".format(message_byte), 2)
+    
+    try:
+        covert += chr(char_decimal)
+    except:
+        covert += "?"
+    
+    i += 8
+
+print("\nCovert message: "+ covert)
