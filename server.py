@@ -15,7 +15,7 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(("", PORT))
 
 # Initializes the secret message that we want to send over covert channel
-covert = "THIS IS A SECRET TING"
+covert = "THIS IS A SECRET THING"
 print("Covert message: " + covert)
 
 # Initializes an empty string to store the covert binary data. 
@@ -33,7 +33,7 @@ server.listen(0)
 # Accepts an incoming connection from a client and retrieves the client's address.
 client, addr = server.accept()
 
-msg = "Some message ...."
+msg = "<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"UTF-8\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>My Webpage</title> </head> <body> <h1>Hello, World!</h1> <p>This is a simple webpage.</p> </body> </html>"
 
 print("sending characters with delays: ")
 
